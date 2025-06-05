@@ -7,7 +7,10 @@ RUN apt upgrade -y
 
 RUN apt clean -y
 
-RUN apt install -y wget gpg
+RUN apt install -y \ 
+	wget \
+	gpg \
+	vim
 
 RUN wget -qO - https://debian.koha-community.org/koha/gpg.asc | \
 	gpg --dearmor -o /usr/share/keyrings/koha-community-keyring.gpg

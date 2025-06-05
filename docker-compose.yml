@@ -9,36 +9,35 @@ services:
     command: bash
     ports:
       - 8080:8080
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
     # environment:
     #   POSTGRES_HOST: db
     #   PORT: 8080
-    # networks:
-    #   - mail-net
+    networks:
+      - catalog-net
     tty: true
     restart: unless-stopped
 
-  # db:
-  #   build:
-  #     context: .
-  #     dockerfile: db/Dockerfile
-  #     args:
-  #       - INIT_PATH=./db/init/*
-  #   env_file:
-  #     - .env
-  #     - db/.env
-  #   volumes:
-  #     - ./postgres-data:/var/lib/postgresql/data
-  #   networks:
-  #     mail-net:
-  #       aliases:
-  #         - postgresdb
-  #   restart: unless-stopped
+  db:
+    build:
+      context: .
+      dockerfile: db/Dockerfile
+      args:
+        - INIT_PATH=./db/init/*
+    volumes:
+      - database-data:/var/lib/mysql
+    env_file:
+      - ./db/.env
+    networks:
+      catalog-net:
+        aliases:
+          - mysqlhost
+    restart: unless-stopped
 
-# volumes:
-#   postgres-data:
+volumes:
+  database-data:
 
-# networks:
-#   mail-net:
-#     driver: bridge
+networks:
+  catalog-net:
+    driver: bridge
