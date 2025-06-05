@@ -25,8 +25,8 @@ services:
       dockerfile: db/Dockerfile
       args:
         - INIT_PATH=./db/init/*
-    volumes:
-      - database-data:/var/lib/mysql
+    # volumes:
+      # - database-data:/var/lib/mysql
     env_file:
       - ./db/.env
     networks:

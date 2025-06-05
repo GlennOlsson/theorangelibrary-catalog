@@ -1,7 +1,0 @@
-Please create a MySQL database and user on mysqlhost as follows:
-
-database name: koha_theorangelibrarys
-database user: koha_theorangelibrarys
-     password: eeaeurLc}ziL~k2{
-
-Thank you.
