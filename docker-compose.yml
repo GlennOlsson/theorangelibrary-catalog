@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: ./koha
+      dockerfile: Dockerfile
+    volumes:
+      - ./koha:/app
+    command: bash
+    ports:
+      - 8080:8080
+    # depends_on:
+    #   - db
+    # environment:
+    #   POSTGRES_HOST: db
+    #   PORT: 8080
+    # networks:
+    #   - mail-net
+    tty: true
+    restart: unless-stopped
+
+  # db:
+  #   build:
+  #     context: .
+  #     dockerfile: db/Dockerfile
+  #     args:
+  #       - INIT_PATH=./db/init/*
+  #   env_file:
+  #     - .env
+  #     - db/.env
+  #   volumes:
+  #     - ./postgres-data:/var/lib/postgresql/data
+  #   networks:
+  #     mail-net:
+  #       aliases:
+  #         - postgresdb
+  #   restart: unless-stopped
+
+# volumes:
+#   postgres-data:
+
+# networks:
+#   mail-net:
+#     driver: bridge
