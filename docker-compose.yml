@@ -9,8 +9,8 @@ services:
     command: bash
     ports:
       - 8080:8080
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
     # environment:
     #   POSTGRES_HOST: db
     #   PORT: 8080
@@ -19,21 +19,21 @@ services:
     tty: true
     restart: unless-stopped
 
-  db:
-    build:
-      context: .
-      dockerfile: db/Dockerfile
-      args:
-        - INIT_PATH=./db/init/*
-    # volumes:
-      # - database-data:/var/lib/mysql
-    env_file:
-      - ./db/.env
-    networks:
-      catalog-net:
-        aliases:
-          - mysqlhost
-    restart: unless-stopped
+  # db:
+  #   build:
+  #     context: .
+  #     dockerfile: db/Dockerfile
+  #     args:
+  #       - INIT_PATH=./db/init/*
+  #   # volumes:
+  #     # - database-data:/var/lib/mysql
+  #   env_file:
+  #     - ./db/.env
+  #   networks:
+  #     catalog-net:
+  #       aliases:
+  #         - mysqlhost
+  #   restart: unless-stopped
 
 volumes:
   database-data:

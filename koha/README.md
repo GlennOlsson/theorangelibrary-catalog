@@ -2,14 +2,24 @@
 ```bash
 cd /app
 cp koha-sites.conf /etc/koha/koha-sites.conf 
-rm /etc/mysql/koha-common.cnf 
-cp koha-mysql.conf  /etc/mysql/koha-common.cnf
+
+# rm /etc/mysql/koha-common.cnf 
+# cp koha-mysql.conf  /etc/mysql/koha-common.cnf
+
 cp apache-ports.conf /etc/apache2/ports.conf 
 
 a2enmod rewrite cgi headers proxy_http
 service apache2 restart
 
-koha-create --request-db theorangelibrary --dbhost mysqlhost
+# koha-create --create-db theorangelibrary
+# koha-create --use-db --passwd /app/passwd --defaultsql /app/koha-backup.sql theorangelibrary
+koha-create --use-db --database koha_theorangelibrary --defaultsql /app/koha-backup.sql theorangelibrary
+
+
+koha-plack --enable theorangelibrary
+koha-plack --start theorangelibrary
+
+# koha-create --request-db theorangelibrary --dbhost mysqlhost --passwdfile /app/passwd
 ```
 Install db as described in `...-request.txt` and `init.sql`
 ```bash
